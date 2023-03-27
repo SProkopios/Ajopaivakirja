@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<title>Page Title</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="">
+<body>
+
+<div class="">
+	<h1>This is a userpage</h1>
+ 	<div>
+		<form th:object="${employee}" th:action="@{/save}" action="#" method="post">
+		<input type="hidden" th:field="*{id}" class="form-control"/>
+			<label for="role">Role</label>
+			<br>
+			<input type="text" id="role" th:field="*{role}" />
+			<br>
+			<label for="name">Name</label> 
+			<br>
+			<input type="text" id="name" th:field="*{name}" />
+			<br>
+			<label for="wage">Wage</label>
+			<br>
+			<input type="text" id= "wage" th:field="*{wage}" />
+			<br>
+			<br>
+ 			<input type="submit" value="Save"></input>
+			<br>
+ 		</form>
+	</div>
+</body>
+</html>
