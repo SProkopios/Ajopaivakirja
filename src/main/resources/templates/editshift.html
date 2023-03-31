@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Edit Shift</title>
+<meta http-equiv="Content-Type" contect="text/html" charset="UTF-8">
+</head>
+<body>
+	<h1>Modify Book</h1>
+	<div>
+		<form th:object="${shift}" th:action="@{../saveShift}" action="#" method="post">
+			<input type="hidden" id="id" th:field="*{id}" class="form-control"/>	
+			<input type="hidden" id="employee" th:field="*{employee}" class="form-control"/>
+			<br>
+			<label for="startingTime">Starting time</label>
+			<br>
+			<input type="time" th:field="*{startingTime}" />
+			<br>
+			<label for="endingTime">Ending time</label>
+			<br>
+			<input type="time" th:field="*{endingTime}" />
+			<br>
+			<label for="date">date</label>
+			<br>
+			<input type="date" th:field="*{date}" />
+			<br>
+			<input type="submit" class="btn btn-success" value="Save"></input>
+		</form>
+	</div>
+	<td th:text=${employee.id} />
+	<td th:text=${id} />
+</body>
+</html>

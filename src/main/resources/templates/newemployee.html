@@ -9,7 +9,7 @@
 <div class="">
 	<h1>This is a userpage</h1>
  	<div>
-		<form th:object="${employee}" th:action="@{/save}" action="#" method="post">
+		<form th:object="${employee}" th:action="@{/saveEmp}" action="#" method="post">
 		<input type="hidden" th:field="*{id}" class="form-control"/>
 			<label for="role">Role</label>
 			<br>

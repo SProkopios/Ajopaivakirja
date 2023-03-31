@@ -1,0 +1,28 @@
+.employees {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.shift-table {
+	margin-bottom: 20px;
+	
+}
+    
+.shift-table td {
+	width: 33.33%;
+}
+
+.shift-table td:nth-child(2) {
+	text-align: center;
+}
+
+th, td {
+text-align: left;
+padding: 8px;
+border: 1px solid black;
+}
+    
+th {
+	background-color: #f2f2f2;
+	font-weight: bold;
+}
