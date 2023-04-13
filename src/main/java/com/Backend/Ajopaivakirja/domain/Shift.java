@@ -1,9 +1,12 @@
 package com.Backend.Ajopaivakirja.domain;
 
 import java.sql.Date;
+import java.time.Duration;
 import java.time.LocalTime;
 
 import org.springframework.lang.NonNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,15 +21,16 @@ import jakarta.persistence.Table;
 @Table(name="shift")
 public class Shift {
 
+	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name="employeeid")
+	@JoinColumn(name="employee")
 	private Employee employee;
 	
     @Id
     @NonNull
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	private LocalTime startingTime;
 
 	private LocalTime endingTime;
@@ -56,6 +60,10 @@ public class Shift {
 		return id;
 	}
 	
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
 	@Column(name = "startingtime", nullable = false)
 	public LocalTime getStartingTime() {
 		return startingTime;
@@ -81,5 +89,10 @@ public class Shift {
 	
 	public void setDate(Date date) {
 		this.date=date;
+	}
+	
+	public long Hours() {
+		Duration duration = Duration.between(startingTime, endingTime);
+		return duration.toHours();
 	}
 }

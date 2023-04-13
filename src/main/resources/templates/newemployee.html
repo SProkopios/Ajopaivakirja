@@ -6,22 +6,38 @@
 <link rel="stylesheet" href="">
 <body>
 
-<div class="">
+<div class=""></div>
 	<h1>This is a userpage</h1>
  	<div>
-		<form th:object="${employee}" th:action="@{/saveEmp}" action="#" method="post">
-		<input type="hidden" th:field="*{id}" class="form-control"/>
+ 		<h2>Give user info</h2>
+		<form th:object="${user}" th:action="@{/saveEmp}" action="#" method="post">
+			<input type="hidden" th:field="*{id}" class="form-control"/>
+			<label for="username">Username</label>
+			<br>
+		    <input type="text" th:field="*{username}" />
+		    <br>
+		    <label for="password">Password</label>
+		    <br>
+			<input type="password" th:field="*{password}" />
+			<br>
 			<label for="role">Role</label>
 			<br>
-			<input type="text" id="role" th:field="*{role}" />
+			<select id="role" th:field="*{role}" >
+				<option th:text="Employee" value="employee"/>
+				<option th:text="Employer" value="employer"/>
+			<select />
+			<br>
+			<input type="hidden" th:field="*{employee.id}" class="form-control"/>
+			<br>
+			<h2>Give employee info</h2>
 			<br>
 			<label for="name">Name</label> 
 			<br>
-			<input type="text" id="name" th:field="*{name}" />
+			<input type="text" id="name" th:field="*{employee.name}" />
 			<br>
 			<label for="wage">Wage</label>
 			<br>
-			<input type="text" id= "wage" th:field="*{wage}" />
+			<input type="text" id= "wage" th:field="*{employee.wage}" />
 			<br>
 			<br>
  			<input type="submit" value="Save"></input>

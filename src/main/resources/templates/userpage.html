@@ -5,62 +5,47 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="stylesheet" th:href="@{/styles.css}">
 <body>
-	<a href="/newemployee">Add new employee</a>
+	<div>
+		<h1>Welcome <b sec:authentication="name"></b></h1>
+	</div>
+	<form th:action="@{/logout}" method="post">
+		<input type="submit" value="Sign Out"/>
+	</form>
+	<a sec:authorize="hasAuthority('employer')" href="/newemployee">Add new employee</a>
 	<div class="">
-		<h1>This is a userpage</h1>
+	<h1>This is a userpage</h1>
 	<table class="employees">
-		<tbody>
-			<tr th:each="employee : ${employees}">
-				<td>
-				<a th:text="${employee.name}" />
-				<a th:href="@{/deleteEmp/{id}(id=${employee.id})}">Fire the employee <a/>
-				<a th:href="@{/editEmp/{id}(id=${employee.id})}">Edit <a/>
-				<br>
-				</td>
-					<table class="shift-tables">
-						<tbody>
-							<tr>
-								<th>Starting time</th>
-								<th>Ending time</th>
-								<th>Date</th>
-							</tr>
-							<tr th:each="shift : ${employee.shifts}" class="column">
-								<td th:text="${shift.startingTime}"></td>
-								<td th:text="${shift.endingTime}"></td>
-								<td th:text="${shift.date}"></td>
-								<td th:text="${}"></td>
-								<td><a th:href="@{/deleteShift/{id}(id=${shift.id})}">Delete</a></td>
-								<td><a th:href="@{/editShift/{id}(id=${shift.id})}">Edit</a></td>
-							</tr>
-						</tbody>
-					</table>
-				</td>
-			</tr>
-		</tbody>
+    <tbody>
+        <tr th:each="employee : ${employees}">
+            <td>
+                <h3 th:text="${employee.name}" />
+                <a th:href="@{/deleteEmp/{id}(id=${employee.id})}">Fire the employee</a>
+                <a th:href="@{/editEmp/{id}(id=${employee.id})}">Edit</a>
+                <br>
+                <table class="shift-tables">
+                    <tbody>
+                        <tr>
+                            <th>Starting time</th>
+                            <th>Ending time</th>
+                            <th>Date</th>
+                            <th>Hours</th>
+                        </tr>
+                        <tr th:each="shift : ${employee.shifts}" class="column">
+                            <td th:text="${shift.startingTime}"></td>
+                            <td th:text="${shift.endingTime}"></td>
+                            <td th:text="${shift.date}"></td>
+                            <td th:text="${shift.Hours}"></td>
+                            <td th:if="${employee.user.role == 'employer'}"><a th:href="@{/deleteShift/{id}(id=${shift.id})}">Delete</a></td>
+                            <td th:if="${employee.user.role == 'employer'}"><a th:href="@{/editShift/{id}(id=${shift.id})}">Edit</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
 	</table>
-	<h1>ADDIII HEI VUORO:D:D:D</h1>
-	<form th:object="${shift}" th:action="@{/saveShift}" action="#" method="post">
-		<input type="hidden" th:field="*{id}" class="form-control"/>
-		<label for="startingTime">Starting Time</label>
-		<br>
-		<input type="time" id="role" th:field="*{startingTime}" />
-		<br>
-		<label for="endingTime">Ending Time</label> 
-		<br>
-		<input type="time" id="name" th:field="*{endingTime}" />
-		<br>
-		<label for="date">Date</label> 
-		<br>
-		<input type="date" id="date" th:field="*{date}" />
- 		<input type="submit" value="Save"></input>
-		<br>
-		<label for="employee">WHO DIS</label> 
-		<select id="employee" th:field="*{employee}" class="form-control">
-			<option th:each="employee: ${employees}" th:value="${employee.id}" th:text="${employee.name}"></option>
-		</select>
-		<br>
- 	</form>
 	<br>
+	<a href="/newshift">new shift</a>
 	</div>
 </body>
 </html>

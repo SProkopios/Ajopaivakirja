@@ -12,7 +12,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -27,18 +29,27 @@ public class Employee {
 		return shifts;
 	}
 	
-    @Id
+	@OneToOne(mappedBy = "employee")
+	private User user;
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	@Id
     @NonNull
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	private String role;
 	private String name;
 	private int wage;
 
-	public Employee(String role, String name, int wage) {
+	public Employee(String name, int wage) {
 		super();
-		this.role = role;
 		this.name = name;
 		this.wage = wage;
 	}
@@ -47,18 +58,14 @@ public class Employee {
 		
 	}
 	
+	
 	@Column(name= "id", nullable = false)
 	public Long getId() {
 		return id;
 	}
 	
-	@Column(name = "role", nullable = false)
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 	@Column(name = "name", nullable = false)
