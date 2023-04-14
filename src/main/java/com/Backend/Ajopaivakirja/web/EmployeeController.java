@@ -43,9 +43,10 @@ public class EmployeeController {
 
 	//Lataa etusivulle kaikki työntekijän tiedot ja vuorot jos rooli on "employer", lataa vain omat tiedot ja vuorot jos rooli on "employee"
 	@RequestMapping("/user")
-	public String employerUser(Model model, Shift shift, @AuthenticationPrincipal UserDetails userDetails) {
+	public String employerUser(Model model, @AuthenticationPrincipal UserDetails userDetails) {
 	    String username = userDetails.getUsername();
 	    User user = urepository.findByUsername(username);
+	    int wage = user.getEmployee().getWage();
 	    if ("employer".equals(user.getRole())) {
 	        model.addAttribute("shifts", srepository.findAll());
 	        model.addAttribute("employees", erepository.findAll());

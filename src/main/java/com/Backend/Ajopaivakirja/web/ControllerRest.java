@@ -25,7 +25,7 @@ public class ControllerRest {
 	return (List<Employee>) erepository.findAll();
 	}
 	
-	// RESTful service to get all students
+	// REST kaikki vuorot
 	@RequestMapping(value="/shifts", method = RequestMethod.GET)
 	public @ResponseBody List<Shift> shiftRest() {
 	return (List<Shift>) srepository.findAll();

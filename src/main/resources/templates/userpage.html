@@ -29,12 +29,14 @@
                             <th>Ending time</th>
                             <th>Date</th>
                             <th>Hours</th>
+                            <th>Wage</th>
                         </tr>
                         <tr th:each="shift : ${employee.shifts}" class="column">
                             <td th:text="${shift.startingTime}"></td>
                             <td th:text="${shift.endingTime}"></td>
                             <td th:text="${shift.date}"></td>
                             <td th:text="${shift.Hours}"></td>
+                            <td th:text="${shift.Hours * employee.wage} + ' euros'"></td>
                             <td th:if="${employee.user.role == 'employer'}"><a th:href="@{/deleteShift/{id}(id=${shift.id})}">Delete</a></td>
                             <td th:if="${employee.user.role == 'employer'}"><a th:href="@{/editShift/{id}(id=${shift.id})}">Edit</a></td>
                         </tr>
