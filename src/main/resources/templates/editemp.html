@@ -7,23 +7,39 @@
 <body>
 	<h1>Modify Book</h1>
 	<div>
-		<form th:object="${employee}" th:action="@{../saveEmp}" action="#" method="post">
-			<input type="hidden" id="id" th:field="*{id}" class="form-control"/>	
+		<form th:object="${user}" th:action="@{/saveEmp}" action="#" method="post">
+			<input type="hidden" th:field="*{id}" class="form-control"/>
+			<label for="username">Username</label>
+			<br>
+		    <input type="text" th:field="*{username}" />
+		    <br>
+		    <label for="password">Password</label>
+		    <br>
+			<input type="password" th:field="*{password}" />
 			<br>
 			<label for="role">Role</label>
 			<br>
-			<input type="text" th:field="*{role}" />
+			<select id="role" th:field="*{role}" >
+				<option th:text="Employee" value="employee"/>
+				<option th:text="Employer" value="employer"/>
+			<select />
 			<br>
-			<label for="name">Name</label>
+			<input type="hidden" th:field="*{employee.id}" class="form-control"/>
 			<br>
-			<input type="text" th:field="*{name}" />
+			<h2>Give employee info</h2>
+			<br>
+			<label for="name">Name</label> 
+			<br>
+			<input type="text" id="name" th:field="*{employee.name}" />
 			<br>
 			<label for="wage">Wage</label>
 			<br>
-			<input type="text" th:field="*{wage}" />
+			<input type="text" id= "wage" th:field="*{employee.wage}" />
 			<br>
-			<input type="submit" class="btn btn-success" value="Save"></input>
-		</form>
+			<br>
+ 			<input type="submit" value="Save"></input>
+			<br>
+ 		</form>
 	</div>
 </body>
 </html>

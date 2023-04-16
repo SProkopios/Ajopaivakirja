@@ -1,9 +1,11 @@
 package com.Backend.Ajopaivakirja.web;
 
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -50,10 +52,12 @@ public class EmployeeController {
 	    if ("employer".equals(user.getRole())) {
 	        model.addAttribute("shifts", srepository.findAll());
 	        model.addAttribute("employees", erepository.findAll());
+	        model.addAttribute("users", urepository.findAll());
 	    } else {
 	        model.addAttribute("shifts", user.getEmployee().getShifts());
 	        Optional<Employee> employee = erepository.findById(user.getEmployee().getId());
 	        model.addAttribute("employees",  employee.orElse(null));
+	        model.addAttribute("users", urepository.findById(user.getId()));
 	    }
 	    return "userpage";
 	}
@@ -74,17 +78,17 @@ public class EmployeeController {
 		return "redirect:/user";
 	}
 
-	//työntekijän poisto
+	//työntekijän ja userin poisto user id:n kautta
 	@RequestMapping(value = "/deleteEmp/{id}", method = RequestMethod.GET)
-	public String deleteEmployee(@PathVariable("id") Long employeeId, Model model) {
-		erepository.deleteById(employeeId);
+	public String deleteEmployee(@PathVariable("id") Long userId, Model model) {
+		urepository.deleteById(userId);
 		return "redirect:../user";
 	}
 
 	//työntekijän muokkaus
 	@RequestMapping(value = "/editEmp/{id}")
-	public String editbook(@PathVariable("id") Long bookId, Model model) {
-		model.addAttribute("employee", erepository.findById(bookId));
+	public String editbook(@PathVariable("id") Long userId, Model model) {
+		model.addAttribute("user", urepository.findById(userId));
 		return "editEmp";
 	}
 }

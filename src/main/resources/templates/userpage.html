@@ -19,8 +19,8 @@
         <tr th:each="employee : ${employees}">
             <td>
                 <h3 th:text="${employee.name}" />
-                <a th:href="@{/deleteEmp/{id}(id=${employee.id})}">Fire the employee</a>
-                <a th:href="@{/editEmp/{id}(id=${employee.id})}">Edit</a>
+                <a th:href="@{/deleteEmp/{id}(id=${employee.user.id})}">Fire the employee</a>
+                <a th:href="@{/editEmp/{id}(id=${employee.user.id})}">Edit</a>
                 <br>
                 <table class="shift-tables">
                     <tbody>
