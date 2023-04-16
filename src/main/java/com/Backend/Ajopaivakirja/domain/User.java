@@ -48,6 +48,12 @@ public class User {
 		this.role = role;
 	}
 	
+	public User(String username, String password, String role, Employee employee) {
+		this.username = username;
+		this.password = password;
+		this.role = role;
+		this.employee = employee;
+	}
 	public User() {}
 	
 	public Long getId() {
